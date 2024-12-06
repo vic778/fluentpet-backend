@@ -78,6 +78,8 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
     aws-eventstream (1.3.0)
     aws-partitions (1.1018.0)
@@ -95,6 +97,7 @@ GEM
       aws-sigv4 (~> 1.5)
     aws-sigv4 (1.10.1)
       aws-eventstream (~> 1, >= 1.0.2)
+    backport (1.2.0)
     base64 (0.2.0)
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-arm64-darwin)
@@ -107,6 +110,9 @@ GEM
     brakeman (6.2.2)
       racc
     builder (3.3.0)
+    childprocess (5.1.0)
+      logger (~> 1.5)
+    coderay (1.1.3)
     concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -114,18 +120,29 @@ GEM
     debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diff-lcs (1.5.1)
     dotenv (3.1.4)
     drb (2.2.1)
+    e2mmap (0.1.0)
     ed25519 (1.3.0)
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
+    factory_bot (6.5.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.4.4)
+      factory_bot (~> 6.5)
+      railties (>= 5.0.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm-linux-gnu)
     ffi (1.17.0-arm64-darwin)
     ffi (1.17.0-x86-linux-gnu)
     ffi (1.17.0-x86_64-darwin)
     ffi (1.17.0-x86_64-linux-gnu)
+    figaro (1.2.0)
+      thor (>= 0.14.0, < 2)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -144,6 +161,7 @@ GEM
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    jaro_winkler (1.6.0)
     jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -160,7 +178,16 @@ GEM
       sshkit (>= 1.23.0, < 2.0)
       thor (~> 1.3)
       zeitwerk (>= 2.6.18, < 3.0)
+    kramdown (2.5.1)
+      rexml (>= 3.3.9)
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     language_server-protocol (3.17.0.3)
+    launchy (3.0.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+    letter_opener (1.10.0)
+      launchy (>= 2.2, < 4)
     logger (1.6.2)
     loofah (2.23.1)
       crass (~> 1.0.2)
@@ -171,6 +198,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.4)
+    method_source (1.1.0)
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
@@ -214,9 +242,13 @@ GEM
       activesupport (>= 7.0.0)
       rack
       railties (>= 7.0.0)
+    pry (0.15.0)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     psych (5.2.1)
       date
       stringio
+    public_suffix (6.0.1)
     puma (6.5.0)
       nio4r (~> 2.0)
     raabro (1.4.0)
@@ -259,6 +291,7 @@ GEM
       zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.2.1)
+    rbs (2.8.4)
     rdoc (6.8.1)
       psych (>= 4.0.0)
     redis-client (0.22.2)
@@ -266,6 +299,26 @@ GEM
     regexp_parser (2.9.3)
     reline (0.5.12)
       io-console (~> 0.5)
+    reverse_markdown (2.1.1)
+      nokogiri
+    rexml (3.3.9)
+    rspec-core (3.13.2)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-rails (7.1.0)
+      actionpack (>= 7.0)
+      activesupport (>= 7.0)
+      railties (>= 7.0)
+      rspec-core (~> 3.13)
+      rspec-expectations (~> 3.13)
+      rspec-mocks (~> 3.13)
+      rspec-support (~> 3.13)
+    rspec-support (3.13.2)
     rubocop (1.69.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -299,11 +352,29 @@ GEM
       ffi (~> 1.12)
       logger
     securerandom (0.4.0)
+    shoulda-matchers (6.4.0)
+      activesupport (>= 5.2.0)
     sidekiq (7.3.6)
       connection_pool (>= 2.3.0)
       logger
       rack (>= 2.2.4)
       redis-client (>= 0.22.2)
+    solargraph (0.50.0)
+      backport (~> 1.2)
+      benchmark
+      bundler (~> 2.0)
+      diff-lcs (~> 1.4)
+      e2mmap
+      jaro_winkler (~> 1.5)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      parser (~> 3.0)
+      rbs (~> 2.0)
+      reverse_markdown (~> 2.0)
+      rubocop (~> 1.38)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
     solid_cable (3.0.4)
       actioncable (>= 7.2)
       activejob (>= 7.2)
@@ -335,6 +406,7 @@ GEM
     thruster (0.1.9-arm64-darwin)
     thruster (0.1.9-x86_64-darwin)
     thruster (0.1.9-x86_64-linux)
+    tilt (2.4.0)
     timeout (0.4.2)
     turbo-rails (2.0.11)
       actionpack (>= 6.0.0)
@@ -354,6 +426,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yard (0.9.37)
     zeitwerk (2.7.1)
 
 PLATFORMS
@@ -370,17 +443,26 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  factory_bot_rails
+  faker
+  figaro
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
   kamal
+  letter_opener
   mqtt (~> 0.4.0)
   pg (~> 1.1)
   propshaft
+  pry
   puma (>= 5.0)
   rails (~> 8.0.0)
+  rspec-rails
+  rubocop
   rubocop-rails-omakase
+  shoulda-matchers
   sidekiq (~> 7.0)
+  solargraph
   solid_cable
   solid_cache
   solid_queue
