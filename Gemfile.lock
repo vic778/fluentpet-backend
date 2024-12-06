@@ -174,7 +174,7 @@ GEM
     mini_magick (4.13.2)
     mini_mime (1.1.5)
     minitest (5.25.4)
-    mqtt (0.4.0)
+    mqtt (0.6.0)
     msgpack (1.7.5)
     net-imap (0.5.1)
       date
@@ -374,7 +374,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   kamal
-  mqtt (~> 0.4.0)
+  mqtt (~> 0.6.0)
   pg (~> 1.1)
   propshaft
   puma (>= 5.0)
