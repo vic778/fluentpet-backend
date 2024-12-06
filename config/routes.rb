@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
     resources :dog_profiles, only: [ :create ]
     resources :button_events, only: [ :create ]
+    resources :audio_files, only: [ :create ]
   end
 end
