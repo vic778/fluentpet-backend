@@ -12,6 +12,9 @@ development:
   POSTGRES_PORT: "5432"
   POSTGRES_USER: "postgres"
   POSTGRES_PASSWORD: "password"
+  AWS_ACCESS_KEY: "AKIAJZJZ"
+  AWS_SECRET: "2weerthrtht"
+  AWS_REGION: "us-east-1"
 
 production:
   cloud_name: "victorbarh"
