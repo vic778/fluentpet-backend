@@ -4,7 +4,7 @@ class DogProfilesController < ApplicationController
 
     if dog_profile.save
       photo_url = url_for(dog_profile.photo)
-      render json: { id: dog_profile.id, photo_url: }, status: :created
+      render "dog_profiles/show.json.jbuilder", locals: { dog_profile: dog_profile, photo_url: photo_url }
     else
       render json: { errors: dog_profile.errors.full_messages }, status: :unprocessable_entity
     end
