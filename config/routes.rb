@@ -5,5 +5,7 @@ Rails.application.routes.draw do
 
   root to: "home#index"
   scope :api, defaults: { format: :json } do
+    resources :dog_profiles, only: [ :create ]
+    resources :button_events, only: [ :create ]
   end
 end
