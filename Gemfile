@@ -42,6 +42,7 @@ gem "image_processing", "~> 1.2"
 
 # Adittional gems
 gem "aws-sdk-s3", "~> 1.114"       # For AWS S3
+gem "aws-sdk-dynamodb", "~> 1.62"  # For AWS DynamoDB
 gem "mqtt", "~> 0.4.0"            # For MQTT communication
 gem "sidekiq", "~> 7.0"            # Background jobs
 gem "active_storage_validations"   # File validations
