@@ -38,7 +38,13 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+
+# Adittional gems
+gem "aws-sdk-s3", "~> 1.114"       # For AWS S3
+gem "mqtt", "~> 0.4.0"            # For MQTT communication
+gem "sidekiq", "~> 7.0"            # Background jobs
+gem "active_storage_validations"   # File validations
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -55,4 +61,3 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
-
