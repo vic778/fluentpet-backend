@@ -27,9 +27,15 @@ class ProcessAudioJob < ApplicationJob
     audio_file.update(metadata: metadata.merge(public_url: public_url))
 
     # Logging or Notify (Optional)
+    cache_audios(audio_file)
     Rails.logger.info "Audio file #{audio_file_id} processed successfully."
   rescue StandardError => e
     Rails.logger.error "Error processing audio file #{audio_file_id}: #{e.message}"
     raise e
+  end
+
+  def cache_audios(audio_data)
+    key = "latest_audio:#{audio_data.button_id}"
+    $redis.setex(key, 1.days, audio_data.to_json)
   end
 end
