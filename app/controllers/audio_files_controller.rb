@@ -3,6 +3,7 @@ class AudioFilesController < ApplicationController
     audio_file = AudioFile.new(audio_file_params)
 
     if audio_file.save
+      ProcessAudioJob.perform_later(audio_file.id)
       file_url = url_for(audio_file.file)
       render json: { id: audio_file.id, file_url: file_url }, status: :created
     else
