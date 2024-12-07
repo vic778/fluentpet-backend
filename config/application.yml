@@ -6,7 +6,7 @@ development:
   gmail_password: "sggh syxf qofj ewli"
   GITHUB_CLIENT_ID: "Ov23liMsmyAogQJIEA0s"
   GITHUB_CLIENT_SECRET: "59f541459d1dfc42a9b17dbbe829e77164c9e8e4"
-  REDIS_URL: "localhost"
+  REDIS_URL: "redis://localhost:6379"
   REDIS_PORT: "6379"
   POSTGRES_HOST: "localhost"
   POSTGRES_PORT: "5432"
