@@ -138,6 +138,7 @@ GEM
       railties (>= 5.0.0)
     faker (3.5.1)
       i18n (>= 1.8.11, < 2)
+    fastimage (2.3.1)
     ffi (1.17.0-aarch64-linux-gnu)
     ffi (1.17.0-arm-linux-gnu)
     ffi (1.17.0-arm64-darwin)
@@ -449,6 +450,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  fastimage (~> 2.1)
   figaro
   image_processing (~> 1.2)
   importmap-rails
