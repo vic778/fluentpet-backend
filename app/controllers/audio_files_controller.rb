@@ -14,6 +14,20 @@ class AudioFilesController < ApplicationController
     end
   end
 
+  def index
+    button_id = params[:button_id]
+
+    if button_id.blank?
+      render json: { error: "button_id is required" }, status: :bad_request
+      return
+    end
+
+    dynamo_service = DynamoDbService.new
+    audio_files = dynamo_service.get_audio_files(button_id)
+
+    render json: { button_id: button_id, audio_files: audio_files }, status: :ok
+  end
+
   private
 
   def audio_file_params

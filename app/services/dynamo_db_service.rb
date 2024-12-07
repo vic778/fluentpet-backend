@@ -30,4 +30,18 @@ class DynamoDbService
       }
     )
   end
+
+  def get_audio_files(button_id, limit: 10)
+    response = @client.query(
+      table_name: AUDIO_FILES_TABLE,
+      key_condition_expression: "button_id = :button_id",
+      expression_attribute_values: {
+        ":button_id" => button_id
+      },
+      scan_index_forward: false,
+      limit: limit
+    )
+
+    response.items
+  end
 end
