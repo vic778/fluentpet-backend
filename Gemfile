@@ -42,13 +42,24 @@ gem "image_processing", "~> 1.2"
 
 # Adittional gems
 gem "aws-sdk-s3", "~> 1.114"       # For AWS S3
-gem "mqtt", "~> 0.6.0"            # For MQTT communication
+gem "aws-sdk-dynamodb", "~> 1.62"  # For AWS DynamoDB
+gem "mqtt", "~> 0.4.0"            # For MQTT communication
 gem "sidekiq", "~> 7.0"            # Background jobs
 gem "active_storage_validations"   # File validations
+gem "figaro"                       # Environment variables
+gem "fastimage", "~> 2.1"       # Image metadata
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "letter_opener"
+  gem "pry"
+  gem "rspec-rails"
+  gem "rubocop"
+  gem "shoulda-matchers"
+  gem "solargraph"
 
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem "brakeman", require: false
