@@ -15,5 +15,4 @@ class DogProfile < ApplicationRecord
       update(metadata: { width: dimensions[0], height: dimensions[1], format: format, size: photo.byte_size })
     end
   end
-
 end
