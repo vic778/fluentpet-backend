@@ -3,6 +3,9 @@
 
 FluentPet Backend is a scalable, fault-tolerant Ruby on Rails application designed to support the integration of IoT devices, enabling pet owners to interact with their pets. The system handles the upload and management of dog profiles, processes button events from IoT devices using `mqtt`, and manages audio recordings uploaded in response to button presses. Built with scalability and reliability in mind, it uses modern microservices principles and integrates with AWS for cloud services.
 
+### ERD PG
+![img](app/assets/images/erd.png)
+
 ## Features
 1 Dog Profile Management:
 
