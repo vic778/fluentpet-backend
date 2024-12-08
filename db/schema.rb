@@ -46,8 +46,10 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_07_161227) do
     t.string "button_id"
     t.datetime "timestamp"
     t.string "event_type"
+    t.bigint "dog_profile_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["dog_profile_id"], name: "index_button_events_on_dog_profile_id"
   end
 
   create_table "dog_profiles", force: :cascade do |t|
@@ -61,4 +63,5 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_07_161227) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "button_events", "dog_profiles"
 end
