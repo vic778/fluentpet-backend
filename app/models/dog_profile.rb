@@ -1,5 +1,6 @@
 class DogProfile < ApplicationRecord
   has_one_attached :photo
+  has_many :button_events, dependent: :destroy
   validates :photo, attached: true, content_type: [ "image/png", "image/jpg", "image/jpeg" ]
 
   after_commit :extract_photo_metadata, on: :create

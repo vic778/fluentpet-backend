@@ -48,6 +48,7 @@ gem "sidekiq", "~> 7.0"            # Background jobs
 gem "active_storage_validations"   # File validations
 gem "figaro"                       # Environment variables
 gem "fastimage", "~> 2.1"       # Image metadata
+gem "redis", "~> 4.2"           # Redis
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

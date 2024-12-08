@@ -1,4 +1,16 @@
 class DogProfilesController < ApplicationController
+  def recent_events
+    cache_key = "recent_events:dog:#{params[:dog_id]}"
+    events = $redis.get(cache_key)
+
+    unless events
+      events = ButtonEvent.includes(:dog_profile).where(dog_profile_id: params[:dog_id]).order(timestamp: :desc).limit(10)
+      $redis.set(cache_key, events.to_json, ex: 1.day)
+    end
+
+    render json: JSON.parse(events)
+  end
+
   def create
     dog_profile = DogProfile.new(dog_profile_params)
 

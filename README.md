@@ -1,7 +1,10 @@
 
 # FluentPet Backend
 
-FluentPet Backend is a scalable, fault-tolerant Ruby on Rails application designed to support the integration of IoT devices, enabling pet owners to interact with their pets. The system handles the upload and management of dog profiles, processes button events from IoT devices, and manages audio recordings uploaded in response to button presses. Built with scalability and reliability in mind, it uses modern microservices principles and integrates with AWS for cloud services.
+FluentPet Backend is a scalable, fault-tolerant Ruby on Rails application designed to support the integration of IoT devices, enabling pet owners to interact with their pets. The system handles the upload and management of dog profiles, processes button events from IoT devices using `mqtt`, and manages audio recordings uploaded in response to button presses. Built with scalability and reliability in mind, it uses modern microservices principles and integrates with AWS for cloud services.
+
+### ERD PG
+![img](app/assets/images/erd.png)
 
 ## Features
 1 Dog Profile Management:
@@ -34,7 +37,7 @@ Sidekiq handles background job processing and retries.
 - Framework: Ruby on Rails
 - Cloud Services: AWS S3, DynamoDB
 - Background Jobs: Sidekiq
-- IoT Protocols: MQTT, HTTP
+- IoT Protocols: MQTT
 - Database: PostgreSQL for relational data, DynamoDB for write-intensive event storage
 - Caching: Redis (for optimizing read queries)
 - Containerization: Docker (optional, for deployment)
@@ -45,8 +48,9 @@ Sidekiq handles background job processing and retries.
 1 Ruby 3.0+
 2 Rails 7.0+
 3 PostgreSQL
-4 Redis
-5 AWS Account with S3, DynamoDB
+4 Mqtt
+5 Redis
+6 AWS Account with S3, DynamoDB
 
 ## Setup Instructions
 
@@ -64,6 +68,16 @@ Sidekiq handles background job processing and retries.
 ### 4 Configure config/database.yml with PostgreSQL credentials.
 
  `db:create db:migrate`
+
+### 5 Start Mqtt Broker locally 
+ ` mosquitto -v `
+
+### Test if the broker is running and broadcasting
+run this on terminal 1 ` mosquitto_sub -h localhost -t test/topic` 
+
+and this on terminal 2 `mosquitto_pub -h localhost -t test/topic -m "Hello MQTT!"`
+The subscriber will display the message sent by the publisher.
+
 
  
 run the server `rails server`
@@ -98,22 +112,8 @@ Start Sidekiq: Ensure Redis is running, then start Sidekiq:
 
 ### Button Events
 
-    Method	Endpoint	Description
-    POST	/button_events	Record a button press event.
-    Request Body:
-    json
-    Copy code
-    {
-    "button_id": "button123",
-    "timestamp": "2024-01-01T12:00:00Z",
-    "event_type": "pressed"
-    }
-    Response:
-    json
-    Copy code
-    {
-    "message": "Event saved"
-    }
+##### run this in a terminal to create an button event using mqtt    
+    mosquitto_pub -h localhost -t fluentpet/button_events -m '{"button_id": "food", "timestamp": "2024-12-07T10:00:00Z", "event_type": "pressed", "dog_profile_id": "1"}'
 ### Audio Files
 
     Method	Endpoint	Description

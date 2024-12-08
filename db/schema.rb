@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_06_191834) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_08_070601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -43,12 +43,23 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_06_191834) do
   end
 
   create_table "audio_files", force: :cascade do |t|
-    t.string "button_id"
-    t.datetime "timestamp"
     t.integer "duration"
+    t.datetime "timestamp"
     t.jsonb "metadata"
+    t.bigint "button_event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["button_event_id"], name: "index_audio_files_on_button_event_id"
+  end
+
+  create_table "button_events", force: :cascade do |t|
+    t.string "button_id"
+    t.datetime "timestamp"
+    t.string "event_type"
+    t.bigint "dog_profile_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dog_profile_id"], name: "index_button_events_on_dog_profile_id"
   end
 
   create_table "dog_profiles", force: :cascade do |t|
@@ -62,4 +73,6 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_06_191834) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "audio_files", "button_events"
+  add_foreign_key "button_events", "dog_profiles"
 end
