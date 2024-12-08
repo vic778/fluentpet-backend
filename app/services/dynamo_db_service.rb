@@ -23,7 +23,7 @@ class DynamoDbService
     @client.put_item(
       table_name: AUDIO_FILES_TABLE,
       item: {
-        button_id: button_id,
+        button_event_id: button_id,
         timestamp: timestamp,
         audio_url: audio_url,
         duration: duration
@@ -34,9 +34,9 @@ class DynamoDbService
   def get_audio_files(button_id, limit: 10)
     response = @client.query(
       table_name: AUDIO_FILES_TABLE,
-      key_condition_expression: "button_id = :button_id",
+      key_condition_expression: "button_event_id = :button_event_id",
       expression_attribute_values: {
-        ":button_id" => button_id
+        ":button_event_id" => button_id
       },
       scan_index_forward: false,
       limit: limit
