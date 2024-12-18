@@ -44,7 +44,7 @@ gem "image_processing", "~> 1.2"
 gem "aws-sdk-s3", "~> 1.114"       # For AWS S3
 gem "aws-sdk-dynamodb", "~> 1.62"  # For AWS DynamoDB
 gem "mqtt", "~> 0.4.0"            # For MQTT communication
-gem "sidekiq", "~> 7.0"            # Background jobs
+gem "sidekiq", "~> 7.3"            # Background jobs
 gem "active_storage_validations"   # File validations
 gem "figaro"                       # Environment variables
 gem "fastimage", "~> 2.1"       # Image metadata
